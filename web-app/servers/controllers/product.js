@@ -20,20 +20,32 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
-    const { id, productID ,userId ,loggedUserType } = req.body;
-    console.log('1');
+    const { id, productId ,userId ,loggedUserType, loggedUserName } = req.body;
+    // console.log('createOrderData', req.body);
 
-    if (!productID || !id || !userId  || !loggedUserType) {
+    if (!productId || !id || !userId  || !loggedUserType) {
         return apiResponse.badRequest(res);
     }
-    console.log('2' +id, productID ,userId ,loggedUserType);
+    console.log('2' +id, productId,userId ,loggedUserType);
 
     if (loggedUserType !== 'consumer' ) {
         return apiResponse.badRequest(res);
     }
-    console.log('3');
+    // console.log('3');
 
-    const modelRes = await productModel.createOrder({id, productID, userId});
+    const modelRes = await productModel.createOrder({id, productId, userId, loggedUserType, loggedUserName});
+    return apiResponse.send(res, modelRes);
+};
+
+exports.isDelivered = async (req, res) => {
+    const { id, productId } = req.body;
+    
+    if (!productId || !id ) {
+        return apiResponse.badRequest(res);
+    }
+    console.log('2' +id, productId);
+
+    const modelRes = await productModel.isDelivered({ productId,id});
     return apiResponse.send(res, modelRes);
 };
 

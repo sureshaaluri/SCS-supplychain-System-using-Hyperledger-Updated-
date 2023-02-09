@@ -5,6 +5,7 @@ export class Navbar extends Component {
   render() {
     const jwtToken = sessionStorage.getItem("jwtToken");
     const role = sessionStorage.getItem("role");
+    const usertype = sessionStorage.getItem("usertype");
     console.log(role);
 
     const Logout = async()=>{
@@ -19,16 +20,27 @@ export class Navbar extends Component {
         <div className="navbar-brand">FoodSC</div>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
-            <li className="navbar-item">
+
+            {
+              usertype == "manufacturer" ?
+              <>
+              <li className="navbar-item">
               <Link to="/createUser" className="nav-link">
                 Create User
               </Link>
-            </li>
-            <li className="navbar-item">
+              </li>
+              <li className="navbar-item">
               <Link to="/createProduct" className="nav-link">
                 Create Product
               </Link>
             </li>
+            </>
+              :
+              null
+            }
+      
+            
+            
             <li className="navbar-item">
               <Link to="/users" className="nav-link">
                 Users
@@ -39,13 +51,19 @@ export class Navbar extends Component {
                 Products
               </Link>
             </li>
-            <li className="navbar-item">
+            {
+              usertype == "consumer" ?
+
+              <li className="navbar-item">
               <Link to="/createOrder" className="nav-link">
                 Create Order
               </Link>
             </li>
+            :
+            null }
+            
             <li className="navbar-item">
-              <Link to="/transcatProduct" className="nav-link">
+              <Link to="/transactProduct" className="nav-link">
                 Transact Product
               </Link>
             </li>
@@ -54,11 +72,19 @@ export class Navbar extends Component {
                 Query Product
               </Link>
             </li>
+
+            
+
             <li className="navbar-item">
+              <Link to="/deliveryProduct" className="nav-link">
+                Delivery Product
+              </Link>
+            </li>
+            {/* <li className="navbar-item">
               <Link to="/orders" className="nav-link">
                 Orders
               </Link>
-            </li>
+            </li> */}
             { jwtToken ? 
               <li className="navbar-item" onClick={Logout}>
               <Link to="/" className="nav-link">

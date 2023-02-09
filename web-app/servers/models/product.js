@@ -64,11 +64,18 @@ exports.getAllProducts = async ( isManufacturer, isMiddlemen, isConsumer ,inform
 };
 
 exports.createOrder = async information => {
-    const { id, productID, userId, userType , name } = information;
-        
-    const networkObj = await network.connect(false, false, true, id);   
-    const contractRes = await network.invoke(networkObj, 'orderProduct', productID, userId);
+    // const { id, productId, userId, userType, name } = information;
 
+    
+
+    const { id, productId, userId, loggedUserType, loggedUserName} = information;
+
+    const networkObj = await network.connect(false, false, true, id);   
+    console.log("get Details",id, userId, productId)
+    
+    const contractRes = await network.invoke(networkObj, 'orderProduct', userId, productId);
+
+    
     const error = networkObj.error || contractRes.error;
     if (error) {
         const status = networkObj.status || contractRes.status;

@@ -14,6 +14,6 @@ productRouter.get('/:productId/:role', controller.getProductbyId);
 productRouter.get('/:role', controller.getAllProducts);
 
 productRouter.post('/order', controller.createOrder);
-// productRouter.post('/delivered', controller.isDelivered);
+productRouter.post('/delivered', controller.isDelivered);
 
 module.exports = productRouter;

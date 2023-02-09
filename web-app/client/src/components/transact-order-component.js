@@ -143,7 +143,7 @@ export class TransactOrder extends Component {
     render() { 
     return (
       <div>
-      <h3>Create New Order</h3>
+      <h3>Transact Order</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
           <label>Products: </label>
@@ -178,7 +178,7 @@ export class TransactOrder extends Component {
         <div className="form-group">
           <input
             type="submit"
-            value="Create Order"
+            value="Transact Order"
             className="btn btn-primary"
           />
         </div>

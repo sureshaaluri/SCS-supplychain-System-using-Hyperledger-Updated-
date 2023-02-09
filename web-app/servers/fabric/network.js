@@ -108,7 +108,7 @@ exports.invoke = async (networkObj, ...funcAndArgs) => {
         console.log("funcAndArgsStrings", funcAndArgsStrings);
         console.log("networkObj", networkObj);
         const response = await networkObj.contract.submitTransaction(...funcAndArgsStrings);
-        console.log(response);
+        console.log("submitTransaction response "+ response);
         console.log(`Transaction ${funcAndArgs} has been submitted: ${response}`);
 
         return JSON.parse(response);
